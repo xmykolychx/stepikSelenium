@@ -277,41 +277,73 @@
 #     browser.quit()
 
 
-from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
-import time, math
+# from selenium import webdriver
+# from webdriver_manager.chrome import ChromeDriverManager
+# import time, math
+#
+# browser = webdriver.Chrome(ChromeDriverManager().install())
+# link = 'http://suninjuly.github.io/redirect_accept.html'
+#
+# try:
+#     def calc(x):
+#         return str(math.log(abs(12 * math.sin(int(x)))))
+#
+#
+#     browser.get(link)
+#
+#     btn = browser.find_element_by_class_name('trollface')
+#     btn.click()
+#
+#     new_window = browser.window_handles[1]
+#     browser.switch_to.window(new_window)
+#
+#     x_elem = browser.find_element_by_id('input_value')
+#     x = x_elem.text
+#
+#     a = browser.find_element_by_id('answer')
+#     a.send_keys(calc(x))
+#
+#     btn1 = browser.find_element_by_tag_name('button')
+#     btn1.click()
+#
+#     a1 = browser.switch_to.alert
+#     print(a1.text)
+#
+# except Exception as e:
+#     print(e)
+#
+# finally:
+#     time.sleep(5)
+#     browser.quit()
 
-browser = webdriver.Chrome(ChromeDriverManager().install())
-link = 'http://suninjuly.github.io/redirect_accept.html'
-
-try:
-    def calc(x):
-        return str(math.log(abs(12 * math.sin(int(x)))))
 
 
-    browser.get(link)
 
-    btn = browser.find_element_by_class_name('trollface')
-    btn.click()
-
-    new_window = browser.window_handles[1]
-    browser.switch_to.window(new_window)
-
-    x_elem = browser.find_element_by_id('input_value')
-    x = x_elem.text
-
-    a = browser.find_element_by_id('answer')
-    a.send_keys(calc(x))
-
-    btn1 = browser.find_element_by_tag_name('button')
-    btn1.click()
-
-    a1 = browser.switch_to.alert
-    print(a1.text)
-
-except Exception as e:
-    print(e)
-
-finally:
-    time.sleep(5)
-    browser.quit()
+# from selenium import webdriver
+# from webdriver_manager.chrome import ChromeDriverManager
+# from selenium.webdriver.common.by import By
+# from selenium.webdriver.support.ui import WebDriverWait
+# from selenium.webdriver.support import expected_conditions as EC
+# import math, time
+#
+# browser = webdriver.Chrome(ChromeDriverManager().install())
+# link = 'http://suninjuly.github.io/explicit_wait2.html'
+#
+# def calc(x):
+#     return str(math.log(abs(12 * math.sin(int(x)))))
+#
+# try:
+#     browser.get(link)
+#     WebDriverWait(browser, 12).until(EC.text_to_be_present_in_element((By.ID, 'price'), '100'))
+#     browser.find_element(By.ID, 'book').click()
+#     browser.find_element_by_id('answer').send_keys(calc(browser.find_element_by_id('input_value').text))
+#     browser.find_element_by_id("solve").click()
+#     print(browser.switch_to.alert.text)
+#
+#
+# except Exception as e:
+#     print(e)
+#
+# finally:
+#     time.sleep(5)
+#     browser.quit()
