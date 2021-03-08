@@ -347,3 +347,76 @@
 # finally:
 #     time.sleep(5)
 #     browser.quit()
+
+
+
+
+# import unittest
+# from selenium import webdriver
+# from webdriver_manager.chrome import ChromeDriverManager
+# import math, time
+#
+# browser = webdriver.Chrome(ChromeDriverManager().install())
+# link = 'http://suninjuly.github.io/registration1.html'
+#
+# class TestLesson(unittest.TestCase):
+#     def test_reg(self):
+#         try:
+#             browser.get(link)
+#             i1 = browser.find_element_by_css_selector('input[required]')
+#             i1.send_keys('ivan')
+#             i2 = browser.find_element_by_xpath('//input[@placeholder="Input your last name"]')
+#             i2.send_keys('ivanov')
+#             i3 = browser.find_element_by_xpath('//input[@placeholder="Input your email"]')
+#             i3.send_keys('ivanov@gmail.com')
+#             button = browser.find_element_by_css_selector("button.btn")
+#             button.click()
+#             time.sleep(1)
+#             welcome_text_elt = browser.find_element_by_tag_name("h1")
+#             welcome_text = welcome_text_elt.text
+#             self.assertEqual("Congratulations! You have successfully registered!", welcome_text)
+#         except Exception as e:
+#             print(e)
+#         finally:
+#             time.sleep(2)
+#             browser.quit()
+#
+# if __name__ == "__main__":
+#     unittest.main()
+
+
+
+# import pytest, time, math
+# from selenium import webdriver
+# from webdriver_manager.chrome import ChromeDriverManager
+#
+# def sum(n,m):
+#     return n+m
+# @pytest.mark.parametrize('n1, n2, exp', [(3,5,8), (1,2,3), (-3,3,0)])
+# def test_sum(n1, n2, exp):
+#     assert sum(n1, n2) == exp
+
+
+import pytest, time, math
+from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
+
+@pytest.fixture(scope="function")
+def browser():
+    print("\nstart browser for test..")
+    browser = webdriver.Chrome(ChromeDriverManager().install())
+    browser.maximize_window()
+    browser.implicitly_wait(10)
+    yield browser
+    print("\nquit browser..")
+    browser.quit()
+
+
+@pytest.mark.parametrize('pages', [236895, 236896, 236897, 236898, 236899, 236903, 236904, 236905])
+def test_guest_should_see_login_link(browser, pages):
+    link = "https://stepik.org/lesson/{}/step/1".format(pages)
+    browser.get(link)
+    browser.find_element_by_css_selector('textarea').send_keys(str(math.log(int(time.time()))))
+    browser.find_element_by_class_name('submit-submission ').click()
+    res = browser.find_element_by_class_name('smart-hints__hint').text
+    assert res == 'Correct!', res
